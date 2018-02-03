@@ -1,7 +1,7 @@
 # dns-dependency-go
 # 画出一个域名与其它DNS域的依赖关系图 
 # Draw the dependency/relationship of a domain name with other DNS domains/zones
-## 二进制： https://gitee.com/mchtech/dns-dependency-go/attach_files
+## 二进制： [Windows, Linux, Darwin](https://gitee.com/mchtech/dns-dependency-go/attach_files)
 ## 效果：
 ### weibo.com
 ![image](https://gitee.com/mchtech/dns-dependency-go/raw/master/sample.min.png)
