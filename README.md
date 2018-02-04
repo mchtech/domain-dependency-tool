@@ -8,7 +8,7 @@
 ![image](https://raw.githubusercontent.com/mchtech/dns-dependency-go/master/sample.focus.min.png)
 ![image](https://raw.githubusercontent.com/mchtech/dns-dependency-go/master/sample.zoom.min.png)
 ## 用法(Usage)：
-> dns-dependency-go [-t] [-c] [-eip] [-nv] [-root] 域名/domain name or FQDN
+> dns-dependency-go [-t] [-c] [-eip] [-v] [-root] 域名/domain name or FQDN
 ## 参数(Parameters)：
 >  -t 指定DNS解析超时时间(秒，默认为2秒) [Specify DNS resoving timeout (in second, default is 2 seconds)]
 
@@ -16,15 +16,15 @@
 
 >  -eip 指定 EDNS-Client-Subnet 的 IPv4 或 IPv6 地址 [Specify the IPv4 or IPv6 address for EDNS-Client-Subnet]
 
->  -nv 不验证权威记录 [do not verify authoritative records]
+>  -v 验证每一个权威记录 [Verify authoritative records]
 
 >  -root 解析根域名服务器记录 [Resoving the root-servers records]
 ## 例子(Examples)：
 
 > dns-dependency-go github.com
 
-> dns-dependency-go -t 2 -c 4 -eip 219.141.140.10 -root github.com
+> dns-dependency-go -t 2 -c 4 -eip 219.141.140.10 -v -root github.com
 
-> dns-dependency-go -t 2 -c 4 -eip 2001:db8::1 -root github.com
+> dns-dependency-go -t 2 -c 4 -eip 2001:db8::1 -v -root github.com
 ## 依赖(Library Dependency)：
 ### echarts http://echarts.baidu.com/
