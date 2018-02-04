@@ -18,7 +18,7 @@
 
 >  -nv 不验证权威NS记录 [Do not verify authoritative NS records]
 
->  -root 解析根域名服务器记录 [Resoving the root-servers records]
+>  -root 解析根域名服务器记录 [Resolve the root-servers records]
 ## 例子(Examples)：
 
 > dns-dependency-go github.com
