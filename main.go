@@ -244,14 +244,14 @@ var cfg Config
 func main() {
 	start := time.Now()
 
-	flag.BoolVar(&cfg.VerifyNS, "v", false, "Verify records in Authority Records (will take a long time and get more relationships)")
+	flag.BoolVar(&cfg.VerifyNS, "nv", false, "No not verify NS records in Authority Records (will take a short time and get less relationships)")
 	flag.BoolVar(&cfg.ResolveRootServer, "root", false, "Resolve root-servers Records")
 	flag.StringVar(&cfg.EDNSClient, "eip", "", "IPv4 or IPv6 address for EDNS-Client-Subnet")
 	flag.IntVar(&cfg.timeout, "t", 2, "timeout of resolving domain (in second)")
 	flag.IntVar(&cfg.TimeoutRetry, "c", 4, "retry count (timeout)")
 	flag.Parse()
 
-	//cfg.VerifyNS = !cfg.VerifyNS
+	cfg.VerifyNS = !cfg.VerifyNS
 	cfg.Timeout = time.Duration(cfg.timeout) * time.Second
 	cfg.Name = flag.Arg(0)
 
