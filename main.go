@@ -189,7 +189,10 @@ func analyze(nm string, reserved bool) []string {
 						fmt.Println("mal package")
 					}
 				} else {
-					if nmip.ans != nil && !nmip.ans.Authoritative {
+					if nmip.ans == nil {
+						ok = false
+						break
+					} else if nmip.ans != nil && !nmip.ans.Authoritative {
 						//非权威应答
 						fmt.Println("!! non-authoritive answer !!")
 						nsrecords := searchnsfromns(nm, nmip.ans.Ns)
@@ -213,15 +216,10 @@ func analyze(nm string, reserved bool) []string {
 							maxloop += nsrecordslen
 							i = maxloop - nsrecordslen - 1
 						}
-						//前一次成功了
-						//if !ok {
 						ok = false
 						break
-						//}
-					}
-					if nmip.ans == nil {
-						ok = false
-						break
+					} else {
+						// OK
 					}
 				}
 			}
