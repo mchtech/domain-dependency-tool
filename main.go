@@ -75,30 +75,26 @@ func getnsip(nm string, nsindex int) ([]string, int) {
 						}
 					} else {
 						fmt.Println("---Using NS records in answer of", nm)
+						// nm(ccc.bbb.aaa) 的 NS (nsrecords)
 						nsrecords := searchnsfromns(nm, nsres.ans.Ns)
 						nslen = len(nsrecords)
-
 						if nslen > 0 {
 							var mergednamefromns []string
 							for _, nsrecord := range nsrecords {
+								nsrecord = strings.ToLower(nsrecord)
 								// 如果是同源，直接收录结果
 								if strings.Index(nsrecord, nm) != -1 {
-									for _, nsr := range nsres.ans.Ns {
-										if nsr.Header().Rrtype == dns.TypeNS {
-											nsn := nsr.(*dns.NS).Ns
-											nsi := searchipfromextra(nsn, nsres.ans.Extra)
-											if len(nsi) > 0 {
-												mergeaaaaatodnsrecord(nsn, nsi)
-											} else {
-												//fmt.Println("bug3")
-											}
-											mergednamefromns = append(mergednamefromns, nsn)
-										}
+									nsi := searchipfromextra(nsrecord, nsres.ans.Extra)
+									if len(nsi) > 0 {
+										mergeaaaaatodnsrecord(nsrecord, nsi)
+									} else {
+										//fmt.Println("bug3")
 									}
+									mergednamefromns = append(mergednamefromns, nsrecord)
 									appendnstodnsrecord(nm, nsrecord)
 									fmt.Println("---Loop", i, "Get results(from Authority RRs)", mp[nm])
-									ret = analyze(nsrecord, false)
-
+									ip := analyze(nsrecord, false)
+									ret = ip
 								} else {
 									ip := analyze(nsrecord, false)
 									mergeaaaaatodnsrecord(nsrecord, ip)
@@ -106,21 +102,16 @@ func getnsip(nm string, nsindex int) ([]string, int) {
 									fmt.Println("---Loop", i, "Get results", mp[nm])
 									ret = ip
 								}
-
 							}
 							//验证每一个NS
 							if cfg.VerifyNS {
 								for _, mname := range mergednamefromns {
 									mname = strings.ToLower(mname)
-									stat := mp[mname]
-									if stat == nil || !stat.verifyed {
+									if stat, ok := mp[mname]; !ok || !stat.verifyed {
 										fmt.Println("----Loop", i, "Verify NS of", mname)
-										//getnsip(mname, 0)
 										//重新验证
 										analyze(mname, true)
-
-										stat = mp[mname]
-										if stat != nil {
+										if stat, ok = mp[mname]; ok {
 											stat.verifyed = true
 										}
 									}
@@ -199,25 +190,30 @@ func analyze(nm string, reserved bool) []string {
 					}
 				} else {
 					if nmip.ans != nil && !nmip.ans.Authoritative {
-
 						//非权威应答
 						fmt.Println("!! non-authoritive answer !!")
-						extrans := searchnsfromns(nm, nmip.ans.Ns)
-						if len(extrans) > 0 {
-							mergenstodnsrecord(upname, extrans)
-							//同源
-							if strings.Index(extrans[0], upname) != -1 {
-								for _, nsr := range nmip.ans.Ns {
-									nsn := nsr.(*dns.NS).Ns
-									nsi := searchipfromextra(nsn, nmip.ans.Extra)
-									if len(nsi) > 0 {
-										//i = maxloop - 1
-										mergeaaaaatodnsrecord(nsn, nsi)
+						nsrecords := searchnsfromns(nm, nmip.ans.Ns)
+						nsrecordslen := len(nsrecords)
+						if nsrecordslen > 0 {
+							mergenstodnsrecord(upname, nsrecords)
+							for _, nsrecord := range nsrecords {
+								nsrecord = strings.ToLower(nsrecord)
+								//同源
+								if strings.Index(nsrecord, upname) != -1 {
+									nsi := searchipfromextra(nsrecord, nmip.ans.Extra)
+									nsiplen := len(nsi)
+									if nsiplen > 0 {
+										mergeaaaaatodnsrecord(nsrecord, nsi)
 									}
 								}
+								if strings.Count(nsrecord, ".")-strings.Count(upname, ".") > 1 {
+									getnsip(getuplevelname(nsrecord), 0)
+								}
 							}
+							maxloop += nsrecordslen
+							i = maxloop - nsrecordslen - 1
 						}
-
+						//前一次成功了
 						//if !ok {
 						ok = false
 						break
@@ -268,7 +264,7 @@ func main() {
 	cfg.Timeout = time.Duration(cfg.timeout) * time.Second
 	cfg.Name = flag.Arg(0)
 
-	// cfg.Name = "www.amazon.com."
+	//cfg.Name = "www.amazon.com."
 	// cfg.VerifyNS = true
 
 	if cfg.Name == "" {
