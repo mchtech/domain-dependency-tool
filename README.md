@@ -4,8 +4,8 @@
 ## 二进制(Binary)： [Windows, Linux, Darwin](https://gitee.com/mchtech/dns-dependency-go/attach_files)
 ## 效果(Result)：
 ### github.com
-![image](https://raw.githubusercontent.com/mchtech/dns-dependency-go/raw/master/sample.min.png)
-![image](https://raw.githubusercontent.com/mchtech/dns-dependency-go/raw/master/sample.focus.min.png)
+![image](https://raw.githubusercontent.com/mchtech/dns-dependency-go/master/sample.min.png)
+![image](https://raw.githubusercontent.com/mchtech/dns-dependency-go/master/sample.focus.min.png)
 ## 用法(Usage)：
 > dns-dependency-go [-t] [-c] [-eip] [-nv] [-root] 域名/domain name or FQDN
 ## 参数(Parameters)：
