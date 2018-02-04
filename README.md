@@ -1,6 +1,6 @@
 # dns-dependency-go
 # 画出一个域名与其它DNS域的依赖关系图 
-# Draw the dependency/relationship of a domain name with other DNS domains/zones
+# Draw the dependency/relationship picture of a domain name with other DNS domains/zones
 ## 二进制(Binary)： [Windows, Linux, Darwin](https://gitee.com/mchtech/dns-dependency-go/attach_files)
 ## 效果(Result)：
 ### github.com
