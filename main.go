@@ -82,26 +82,17 @@ func getnsip(nm string, nsindex int) ([]string, int) {
 							var mergednamefromns []string
 							for _, nsrecord := range nsrecords {
 								nsrecord = strings.ToLower(nsrecord)
-								// 如果是同源，直接收录结果
-								if strings.Index(nsrecord, nm) != -1 {
-									nsi := searchipfromextra(nsrecord, nsres.ans.Extra)
-									if len(nsi) > 0 {
-										mergeaaaaatodnsrecord(nsrecord, nsi)
-									} else {
-										//fmt.Println("bug3")
-									}
-									mergednamefromns = append(mergednamefromns, nsrecord)
-									appendnstodnsrecord(nm, nsrecord)
-									fmt.Println("---Loop", i, "Get results(from Authority RRs)", mp[nm])
-									ip := analyze(nsrecord, false)
-									ret = ip
+								nsi := searchipfromextra(nsrecord, nsres.ans.Extra)
+								if len(nsi) > 0 {
+									mergeaaaaatodnsrecord(nsrecord, nsi)
 								} else {
-									ip := analyze(nsrecord, false)
-									mergeaaaaatodnsrecord(nsrecord, ip)
-									appendnstodnsrecord(nm, nsrecord)
-									fmt.Println("---Loop", i, "Get results", mp[nm])
-									ret = ip
+									//fmt.Println("bug3")
 								}
+								mergednamefromns = append(mergednamefromns, nsrecord)
+								appendnstodnsrecord(nm, nsrecord)
+								fmt.Println("---Loop", i, "Get results(from Authority RRs)", mp[nm])
+								ip := analyze(nsrecord, false)
+								ret = dupmerge(ret, ip)
 							}
 							//验证每一个NS
 							if cfg.VerifyNS {
