@@ -47,17 +47,17 @@ func getnsip(nm string, nsindex int) ([]string, int) {
 			}
 		}
 
-	} else { // 如果 nm (buct.edu.cn) 的 NS记录 不存在
-		// uplevelnm (edu.cn)
+	} else { // 如果 nm (ccc.bbb.aaa) 的 NS记录 不存在
+		// uplevelnm (bbb.aaa)
 		uplevelnm := getuplevelname(nm)
 		var nsip []string
 		maxloop := 1
 		for i := 0; i < maxloop; i++ {
 			fmt.Println("--Loop", i, "for getting NS of", uplevelnm)
-			// nsip: 得到 edu.cn 的 NS
+			// nsip: 得到 bbb.aaa 的 NS
 			nsip, maxloop = getnsip(uplevelnm, i)
 			if len(nsip) > 0 {
-				// 向 nsip (edu.cn 的 NS) 查询 nm (buct.edu.cn) 的 NS (nsres)
+				// 向 nsip (bbb.aaa 的 NS) 查询 nm (ccc.bbb.aaa) 的 NS (nsres)
 				nsres := querydns(nsip, nm, dns.TypeNS, cla)
 				if nsres.ans != nil {
 					if len(nsres.ans.Ns) == 0 {
