@@ -242,6 +242,8 @@ type Config struct {
 var cfg Config
 
 func main() {
+	start := time.Now()
+
 	flag.BoolVar(&cfg.VerifyNS, "v", false, "Verify records in Authority Records (will take a long time and get more relationships)")
 	flag.BoolVar(&cfg.ResolveRootServer, "root", false, "Resolve root-servers Records")
 	flag.StringVar(&cfg.EDNSClient, "eip", "", "IPv4 or IPv6 address for EDNS-Client-Subnet")
@@ -333,6 +335,7 @@ func main() {
 	genjs(cfg.Name, mp, fname)
 	fmt.Println(fname + " generated")
 	OpenURL(fname)
+	fmt.Println("Spent", time.Now().Sub(start))
 }
 
 var commands = map[string][]string{
