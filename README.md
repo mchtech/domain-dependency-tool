@@ -3,10 +3,9 @@
 # Draw the dependency/relationship of a domain name with other DNS domains/zones
 ## 二进制(Binary)： [Windows, Linux, Darwin](https://gitee.com/mchtech/dns-dependency-go/attach_files)
 ## 效果(Result)：
-### weibo.com
-![image](https://gitee.com/mchtech/dns-dependency-go/raw/master/sample.min.png)
-### www.amazon.com
-![image](https://raw.githubusercontent.com/mchtech/dns-dependency-go/master/complexsample.min.png)
+### github.com
+![image](https://raw.githubusercontent.com/mchtech/dns-dependency-go/raw/master/sample.min.png)
+![image](https://raw.githubusercontent.com/mchtech/dns-dependency-go/raw/master/sample.focus.min.png)
 ## 用法(Usage)：
 > dns-dependency-go [-t] [-c] [-eip] [-nv] [-root] 域名/domain name or FQDN
 ## 参数(Parameters)：
@@ -21,10 +20,10 @@
 >  -root 解析根域名服务器记录 [Resoving the root-servers records]
 ## 例子(Examples)：
 
-> dns-dependency-go weibo.com
+> dns-dependency-go github.com
 
-> dns-dependency-go -t 2 -c 4 -eip 219.141.140.10 -root weibo.com
+> dns-dependency-go -t 2 -c 4 -eip 219.141.140.10 -root github.com
 
-> dns-dependency-go -t 2 -c 4 -eip 2001:db8::1 -root weibo.com
+> dns-dependency-go -t 2 -c 4 -eip 2001:db8::1 -root github.com
 ## 依赖(Library Dependency)：
 ### echarts http://echarts.baidu.com/
