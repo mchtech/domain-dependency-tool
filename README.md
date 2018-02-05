@@ -1,12 +1,12 @@
-# dns-dependency-go
-# 画出一个域名与其它DNS域的依赖关系/拓扑图 
-# Draw the dependency graph/topology of a domain name with other DNS domains/zones
+# domain-dependency-tool
+# 一个能画出域名与其它DNS域的依赖关系/拓扑图的工具
+# A dependency graph/topology tool that can draw domain names with other DNS domains/zones
 ## 二进制(Binary)： [Windows, Linux, Darwin](https://gitee.com/mchtech/dns-dependency-go/attach_files)
 ## 效果(Result)：
 ### github.com
-![image](https://raw.githubusercontent.com/mchtech/dns-dependency-go/master/sample.min.png)
-![image](https://raw.githubusercontent.com/mchtech/dns-dependency-go/master/sample.focus.min.png)
-![image](https://raw.githubusercontent.com/mchtech/dns-dependency-go/master/sample.zoom.min.png)
+![image](https://raw.githubusercontent.com/mchtech/domain-dependency-tool/master/sample.min.png)
+![image](https://raw.githubusercontent.com/mchtech/domain-dependency-tool/master/sample.focus.min.png)
+![image](https://raw.githubusercontent.com/mchtech/domain-dependency-tool/master/sample.zoom.min.png)
 ## 用法(Usage)：
 > dns-dependency-go [-t timeout] [-c retry_count] [-eip clientip] [-nv] [-root] 域名/domain_name_or_FQDN
 ## 参数(Parameters)：
