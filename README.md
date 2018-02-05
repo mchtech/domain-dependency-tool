@@ -6,6 +6,7 @@
 ### github.com
 ![image](https://raw.githubusercontent.com/mchtech/domain-dependency-tool/master/sample.min.png)
 ![image](https://raw.githubusercontent.com/mchtech/domain-dependency-tool/master/sample.focus.min.png)
+### 图缩放：滚轮(Zoom: use the wheel)：
 ![image](https://raw.githubusercontent.com/mchtech/domain-dependency-tool/master/sample.zoom.min.png)
 ## 用法(Usage)：
 > dns-dependency-go [-t timeout] [-c retry_count] [-eip clientip] [-nv] [-root] 域名/domain_name_or_FQDN
