@@ -1,7 +1,7 @@
 # domain-dependency-tool
 # 一个能画出域名与其它DNS域的依赖关系/拓扑图的工具
 # A dependency graph/topology tool that can draw domain names with other DNS domains/zones
-## 二进制(Binary)： [Windows, Linux, Darwin](https://gitee.com/mchtech/dns-dependency-go/attach_files)
+## 二进制(Binary)： [Windows, Linux, Darwin](https://github.com/mchtech/domain-dependency-tool/releases/tag/v1.1)
 ## 效果(Result)：
 ### github.com
 ![image](https://raw.githubusercontent.com/mchtech/domain-dependency-tool/master/sample.min.png)
