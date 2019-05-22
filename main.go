@@ -340,8 +340,8 @@ func main() {
 
 var commands = map[string][]string{
 	"windows": []string{"cmd", " /c start "},
-	"darwin":  []string{"open"},
-	"linux":   []string{"xdg-open"},
+	"darwin":  []string{"open", ""},
+	"linux":   []string{"xdg-open", ""},
 }
 
 // Open calls the OS default program for uri
